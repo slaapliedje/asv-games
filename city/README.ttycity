@@ -1,0 +1,26 @@
+ttycity for Atari System V and AMIX
+===================================
+
+ttycity is tenox7's port of Micropolis (the open-source SimCity) to
+curses terminals (github.com/tenox7/ttycity), built as a static AMIX
+program.  On Atari System V it runs through the service pack's amx module
+(github.com/slaapliedje/atari-sysv-sp1).
+
+    ttycity                       monochrome
+    TERM=xterm-color ttycity      8 colours, in an xterm or over telnet
+                                  from a colour terminal
+
+The system's "xterm" terminal entry has no colour, so the package brings
+an "xterm-color" one (share/terminfo; its source is doc/xterm-color.ti)
+and the ttycity command uses it when TERM is xterm-color.  The mouse and
+the Unicode mode are not built: SVR4 curses has neither.
+
+Installed under /opt/ttycity (bin, lib, share/cities, doc), with
+/usr/bin/ttycity linking to the command.
+
+Install as root:   pkgadd -d ttycity-VERSION.pkg TTYCITY
+Remove:            pkgrm TTYCITY
+
+Source: github.com/slaapliedje/asv-games has the build scripts, the one
+source change and the exact upstream commit.  Licence: GPL-3.0 with the
+Micropolis additional terms (LICENSE here).

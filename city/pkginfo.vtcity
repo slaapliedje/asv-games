@@ -1,0 +1,6 @@
+PKG=VTCITY
+NAME=vtcity - Micropolis for DEC VT soft-font terminals
+ARCH=m68k
+CATEGORY=application
+VENDOR=tenox7; SVR4 port github.com/slaapliedje/asv-games
+DESC=vtcity, tenox7's Micropolis for VT320/340/420 terminals with downloadable fonts, as a static AMIX program. On Atari System V it needs the service pack's amx module.

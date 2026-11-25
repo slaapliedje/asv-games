@@ -1,0 +1,25 @@
+vtcity for Atari System V and AMIX
+==================================
+
+vtcity is tenox7's port of Micropolis (the open-source SimCity) to DEC
+VT320/340/420 terminals with downloadable fonts
+(github.com/tenox7/vtcity), built as a static AMIX program.  On Atari
+System V it runs through the service pack's amx module
+(github.com/slaapliedje/atari-sysv-sp1).
+
+    vtcity                 asks the terminal what it is
+    vtcity -noquery -t 420 skip the question and draw for a VT420
+
+It needs a terminal or emulator that takes DEC soft fonts (DECDLD): a real
+VT320 or later, or an emulator that implements them.  A plain xterm shows letters in place
+of the tiles.  For those, use ttycity.
+
+Installed under /opt/vtcity (bin, lib, share/cities, doc), with
+/usr/bin/vtcity linking to the command.
+
+Install as root:   pkgadd -d vtcity-VERSION.pkg VTCITY
+Remove:            pkgrm VTCITY
+
+Source: github.com/slaapliedje/asv-games has the build scripts and the
+exact upstream commit (no source changes).  Licence: GPL-3.0 with the
+Micropolis additional terms (LICENSE here).

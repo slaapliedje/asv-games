@@ -1,0 +1,31 @@
+NetHack 5.0 for Atari System V and AMIX
+=======================================
+
+NetHack 5.0 (the m68k-wip branch of github.com/NetHack/NetHack) built as
+a static AMIX program.  On Atari System V it runs through the service
+pack's amx module (github.com/slaapliedje/atari-sysv-sp1).
+
+    nethack         play in the terminal
+    nethack -x      play in an X window with tiles (DISPLAY must be set)
+
+Other arguments go to the game (-u name, -p role, -D ...).  Options go in
+~/.nethackrc or $NETHACKOPTIONS; see Guidebook.txt here.
+
+Installed files:
+
+    /opt/nethack/bin/nethack    the command (/usr/bin/nethack links to it)
+    /opt/nethack/lib/           the program, its data, tiles, X resources
+                                and sysconf (who may use wizard mode, ...)
+    /opt/nethack/doc/           this file, the Guidebook, the licence
+    /var/opt/nethack/           scores, logs, saved games, bones: made on
+                                first play, kept by pkgrm
+
+Install as root:   pkgadd -d nethack-VERSION.pkg NETHACK
+Remove:            pkgrm NETHACK
+
+The game directory is open to every user (mode 0777): the program is not
+set-group-id, so anyone on the machine can edit the score file.
+
+Source: github.com/slaapliedje/asv-games has the build scripts, the
+source changes and the exact upstream commit.  NetHack is under the
+NetHack General Public License (the file "license" here).

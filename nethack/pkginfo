@@ -1,0 +1,6 @@
+PKG=NETHACK
+NAME=NetHack 5.0 for Atari System V and AMIX
+ARCH=m68k
+CATEGORY=application
+VENDOR=NetHack DevTeam; SVR4 port github.com/slaapliedje/asv-games
+DESC=NetHack 5.0 (m68k-wip) as a static AMIX program: terminal play, and X11 with tiles (nethack -x). On Atari System V it needs the service pack's amx module.

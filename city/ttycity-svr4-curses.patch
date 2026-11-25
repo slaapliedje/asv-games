@@ -1,0 +1,27 @@
+diff --git a/src/nc_render.c b/src/nc_render.c
+index bc4f45e..66d0d9c 100644
+--- a/src/nc_render.c
++++ b/src/nc_render.c
+@@ -263,6 +263,22 @@ nc_colors_init(void)
+       if (n < COLOR_PAIRS) init_pair(n, fg, bg);
+     }
+   }
++#ifndef NCURSES_VERSION
++  /* SVR4 curses believes the terminal's foreground is already black until it
++   * has set one itself, so the first black-on-colour text would come out in
++   * the terminal's own foreground.  Set a foreground once, before drawing. */
++  {
++    static int primed;
++
++    if (!primed) {
++      primed = 1;
++      attrset(COLOR_PAIR(NC_PAIR(COLOR_WHITE, COLOR_BLACK)));
++      mvaddch(0, 0, ' ');
++      refresh();
++      attrset(0);
++    }
++  }
++#endif
+ }
+ 
+ /* Editor region on screen (computed each frame; shared with nc_minimap etc). */

@@ -1,0 +1,64 @@
+diff --git a/win/X11/winlabel.c b/win/X11/winlabel.c
+index ac1255e..67365cf 100644
+--- a/win/X11/winlabel.c
++++ b/win/X11/winlabel.c
+@@ -700,9 +700,13 @@ widget_compare(const void *key_, const void *value_)
+ static WidgetBucket *
+ find_widget_bucket(Widget w)
+ {
+-    WidgetBucket *bucket =
+-            bsearch(w, widget_table, num_widgets, sizeof(WidgetBucket),
+-                    widget_compare);
++    WidgetBucket *bucket;
++
++    /* SVR4's bsearch() compares once even with no elements */
++    if (num_widgets == 0)
++        return NULL;
++    bucket = bsearch(w, widget_table, num_widgets, sizeof(WidgetBucket),
++                     widget_compare);
+     return bucket;
+ }
+ 
+diff --git a/win/X11/winmap.c b/win/X11/winmap.c
+index f325029..ce1e386 100644
+--- a/win/X11/winmap.c
++++ b/win/X11/winmap.c
+@@ -1421,6 +1421,7 @@ set_button_values(Widget w, int x, int y, unsigned int button)
+     click_button = (button == Button1) ? CLICK_1 : CLICK_2;
+ }
+ 
++#ifdef XtNreportCallback /* X11R5 and later */
+ /* This ensures that the cursor is visible when we first see the map */
+ static void
+ report_callback(Widget w, XtPointer client_data,
+@@ -1435,6 +1436,7 @@ report_callback(Widget w, XtPointer client_data,
+         }
+     }
+ }
++#endif
+ 
+ /*
+  * Map window expose callback.
+@@ -2006,7 +2008,9 @@ create_map_window(
+         num_args);         /* number of values to set */
+ 
+     XtAddCallback(map, XtNexposeCallback, map_exposed, (XtPointer) 0);
++#ifdef XtNreportCallback
+     XtAddCallback(viewport, XtNreportCallback, report_callback, wp);
++#endif
+ 
+     map_info = wp->map_information =
+         (struct map_info_t *) alloc(sizeof (struct map_info_t));
+@@ -2134,7 +2138,11 @@ destroy_map_window(struct xwindow *wp)
+ 
+         /* Free the font structure if we allocated one */
+ #if defined(ENHANCED_SYMBOLS) && !defined(USE_XFT)
+-        XFreeFont(XtDisplay(wp->w), text_map->font);
++        /* X11_set_map_font() falls back to the widget's own font, which
++           is Xt's and is shared with every label: freeing that one leaves
++           the windows still to come (the tombstone) with a dead font */
++        if (text_map->font && text_map->font != WindowFontStruct(wp->w))
++            XFreeFont(XtDisplay(wp->w), text_map->font);
+ #endif
+ 
+         /* Free malloc'ed space. */
