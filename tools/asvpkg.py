@@ -9,7 +9,7 @@ NAME, ARCH, VERSION, CATEGORY, ...; CLASSES defaults to "none"). Each
 DEST=SRC installs the file SRC at the absolute path DEST, mode 0755 for
 an executable SRC and 0644 otherwise unless MODE is given. A DEST ending
 in '/' with no SRC (`/opt/openua/doc/=`) is just a directory, 0755 unless
-a mode follows (`/var/opt/nethack/=:0777`). `DEST=@TARGET` is a symbolic
+a mode follows (`/var/opt/nethack/=:1777`). `DEST=@TARGET` is a symbolic
 link to TARGET. Directories leading to every file are made 0755 root sys,
 but the system's own (SYSDIRS below) are not listed at all. Files belong
 to root bin.

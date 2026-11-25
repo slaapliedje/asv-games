@@ -34,7 +34,7 @@ nethack)
 	    /opt/nethack/doc/README=nethack/README:0644 \
 	    /opt/nethack/doc/Guidebook.txt=$U/nethack/doc/Guidebook.txt:0644 \
 	    /opt/nethack/doc/license=$D/license:0644 \
-	    /var/opt/nethack/=:0777 /var/opt/nethack/save/=:0777
+	    /var/opt/nethack/=:1777 /var/opt/nethack/save/=:1777
 	;;
 ttycity|vtcity)
 	bash city/build.sh $p

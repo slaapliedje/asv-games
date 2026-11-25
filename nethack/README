@@ -23,8 +23,9 @@ Installed files:
 Install as root:   pkgadd -d nethack-VERSION.pkg NETHACK
 Remove:            pkgrm NETHACK
 
-The game directory is open to every user (mode 0777): the program is not
-set-group-id, so anyone on the machine can edit the score file.
+The game directory is open to every user, with the sticky bit (mode 1777,
+as /tmp): the program is not set-group-id, so anyone on the machine can
+edit the score file, but not remove another user's saved game.
 
 Source: github.com/slaapliedje/asv-games has the build scripts, the
 source changes and the exact upstream commit.  NetHack is under the

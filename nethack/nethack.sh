@@ -8,7 +8,7 @@ XAPPLRESDIR=$HACKDIR/
 XFILESEARCHPATH=$HACKDIR/%N
 export HACKDIR XAPPLRESDIR XFILESEARCHPATH
 umask 0
-[ -d $VAR/save ] || mkdir $VAR/save
+[ -d $VAR/save ] || { mkdir $VAR/save; chmod 1777 $VAR/save; }
 touch $VAR/record $VAR/logfile $VAR/xlogfile $VAR/livelog $VAR/perm 2>/dev/null
 if [ "$1" = -x ]
 then
