@@ -17,10 +17,11 @@ nethack)
 	info nethack/pkginfo "$v" $B/pkginfo.nethack
 	sed -e 's/^WIZARDS=.*/WIZARDS=root/' -e '/^GDBPATH=/d' -e '/^GREPPATH=/d' -e '/^PANICTRACE_/d' $U/nethack/sys/unix/sysconf > $B/sysconf
 	# the X11 port reads its tiles from the BMP (the hints build x11tiles, an
-	# XPM); the tombstone's Times font is not on every X server, and without
-	# it the game dies of an X error on the way out
+	# XPM); the tombstone's Times font is not on every X server; "Dark cyan"
+	# is not in X11R4's rgb.txt, which ASV's X servers read
 	sed -e 's/^NetHack.tile_file: .*/NetHack.tile_file: nhtiles.bmp/' \
-	    -e 's/^\(NetHack\*text\*rip\*font:  *\).*/\1fixed/' $U/nethack/dat/NetHack.ad > $B/NetHack.ad
+	    -e 's/^\(NetHack\*text\*rip\*font:  *\).*/\1fixed/' \
+	    -e 's/^\(NetHack\*map\*cyan:  *\)Dark cyan/\1#008b8b/' $U/nethack/dat/NetHack.ad > $B/NetHack.ad
 	L=/opt/nethack/lib D=$U/nethack/dat
 	python3 tools/asvpkg.py dist/nethack-$v.pkg $B/pkginfo.nethack \
 	    /opt/nethack/bin/nethack=nethack/nethack.sh:0755 \

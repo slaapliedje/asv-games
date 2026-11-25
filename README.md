@@ -31,9 +31,14 @@ scores and saved games in `/var/opt/nethack` stay.
 In Hatari running Atari System V with the service pack: `pkgadd`,
 `pkgchk` and `pkgrm` of each package; NetHack played, saved and quit in
 a terminal, and played by keyboard with tiles on a remote X display;
-ttycity in colour; vtcity's output checked for its soft fonts.  Not yet
-tried: NetHack's X11 mode on the TT's own X server, its graphical
-tombstone, and AMIX on an Amiga.
+ttycity in colour; vtcity's output checked for its soft fonts.  On the
+TT030 MiSTer core, on the ATW800/2's X server (Xatw, X11R6.3):
+`nethack -x` starts, takes a mouse click and draws the map in tiles.
+Not yet tried: keyboard play on Xatw, the graphical tombstone, a player
+other than root, and AMIX on an Amiga.
+
+A game started from a telnet or serial login ends when that login does,
+`nohup` or not: NetHack takes the hangup itself.
 
 ## Building
 
@@ -55,11 +60,15 @@ Paths are in `common/env.sh`; override them in the environment.
 
 ## What was changed
 
-- **NetHack**, `nethack/nethack-asv.patch`, all in `win/X11`: SVR4's
-  `bsearch()` calls the comparison once on an empty table; X11R4 has no
-  `XtNreportCallback`; and the map window freed the widget's own font when
-  the X server had no Unicode variant of it, so the end-of-game windows
-  died of `BadFont`.
+- **NetHack**, `nethack/nethack-asv.patch`, all in `win/X11`:
+  - SVR4's `bsearch()` calls the comparison once on an empty table;
+  - X11R4 has no `XtNreportCallback`;
+  - the map window freed the widget's own font when the X server had no
+    Unicode variant of it, so the end-of-game windows died of `BadFont`;
+  - three status-column arrays were one `int` short, so a column width
+    overwrote the next column's first field: harmless with a small font,
+    "create_widget: unknown type" with a larger one;
+  - "dark cyan" and "web gray" are not in X11R4's `rgb.txt`.
 - **ttycity**, `city/ttycity-svr4-curses.patch`: SVR4 curses takes the
   terminal's foreground for black until it has set one.
 - **vtcity**: nothing.

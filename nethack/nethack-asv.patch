@@ -62,3 +62,43 @@ index f325029..ce1e386 100644
  #endif
  
          /* Free malloc'ed space. */
+diff --git a/win/X11/winstat.c b/win/X11/winstat.c
+index 1e0da44..50cb399 100644
+--- a/win/X11/winstat.c
++++ b/win/X11/winstat.c
+@@ -192,8 +192,8 @@ static const char *const fancy_status_hilite_colors[] = {
+     "saddle brown",
+     "blue",
+     "magenta3",
+-    "dark cyan",
+-    "web gray",
++    "#008b8b",   /* "dark cyan" and "web gray" are not in X11R4's rgb.txt */
++    "#808080",
+     "",          /* NO_COLOR */
+     "orange",
+     "green3",
+@@ -2478,18 +2478,20 @@ static int status_indices[][13] = {
+ };
+ /* used to fill up the empty space to right of last status condition column */
+ static int leftover_indices[] = { F_DUMMY, -1, 0, 0 };
+-/* -2: top two rows of these columns are reserved for title and location */
+-static int col1_indices[13 - 2] = {
++/* -2: top two rows of these columns are reserved for title and location;
++   9 fields, the -1 and init_column()'s two widths are 12: at [13 - 2] the
++   second width landed on the next array's first field */
++static int col1_indices[13] = {
+     F_HP,    F_POWER,    F_AC,    F_XP_LEVL, F_GOLD,  F_DUMMY,
+     F_BAREH, F_WEAPON, F_DUMMY,
+     -1
+ };
+-static int col2_indices[13 - 2] = {
++static int col2_indices[13] = {
+     F_MAXHP, F_MAXPOWER, F_ALIGN, F_EXP_PTS, F_SCORE, F_TIME,
+     F_DUMMY, F_ARMOR, F_DUMMY,
+     -1
+ };
+-static int characteristics_indices[13 - 2] = {
++static int characteristics_indices[13] = {
+     F_STR, F_DEX, F_CON, F_INT, F_WIS, F_CHA,
+     F_DUMMY, F_TERRAIN, F_DUMMY,
+     -1
