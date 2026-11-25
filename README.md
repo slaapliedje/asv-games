@@ -30,12 +30,13 @@ scores and saved games in `/var/opt/nethack` stay.
 
 In Hatari running Atari System V with the service pack: `pkgadd`,
 `pkgchk` and `pkgrm` of each package; NetHack played, saved and quit in
-a terminal, and played by keyboard with tiles on a remote X display;
-ttycity in colour; vtcity's output checked for its soft fonts.  On the
-TT030 MiSTer core, on the ATW800/2's X server (Xatw, X11R6.3):
-`nethack -x` starts, takes a mouse click and draws the map in tiles.
-Not yet tried: keyboard play on Xatw, the graphical tombstone, a player
-other than root, and AMIX on an Amiga.
+a terminal, and played by keyboard with tiles on a remote X display,
+to a death and its graphical tombstone; the same played, saved, restored
+and quit by a user other than root; ttycity in colour; vtcity's output
+checked for its soft fonts.  On the ATW800/2's X server (Xatw, X11R6.3):
+`nethack -x` played by keyboard from an xdm session in Hatari, and on
+the TT030 MiSTer core it starts, takes a mouse click and draws the map
+in tiles.  Not yet tried: a real TT030, and AMIX on an Amiga.
 
 A game started from a telnet or serial login ends when that login does,
 `nohup` or not: NetHack takes the hangup itself.
